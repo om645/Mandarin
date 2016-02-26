@@ -7,13 +7,13 @@ import com.superduckinvaders.game.Round;
 import com.superduckinvaders.game.ai.AI;
 import com.superduckinvaders.game.ai.DummyAI;
 import com.superduckinvaders.game.assets.TextureSet;
-import com.superduckinvaders.game.entity.Character;
+import com.superduckinvaders.game.entity.TheCharacter;
 import com.superduckinvaders.game.entity.Player;
 
 /**
  * A baddie. Not a goodie, a baddie. Bad-die.
  */
-public class Mob extends Character {
+public class Mob extends TheCharacter {
 
     /**
      * The texture set to use for this Mob.

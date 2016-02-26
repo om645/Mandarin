@@ -10,7 +10,7 @@ import java.util.ArrayList;
 /**
  * Represents a character in the game.
  */
-public abstract class Character extends PhysicsEntity {
+public abstract class TheCharacter extends PhysicsEntity {
 
     /**
      * The direction the Character is facing.
@@ -65,7 +65,7 @@ public abstract class Character extends PhysicsEntity {
      * @param y             the initial y coordinate
      * @param maximumHealth the maximum (and initial) health of this Character
      */
-    public Character(Round parent, float x, float y, int maximumHealth) {
+    public TheCharacter(Round parent, float x, float y, int maximumHealth) {
         super(parent, x, y);
         this.maximumHealth = this.currentHealth = maximumHealth;
         enemiesInRange = new ArrayList<>();
@@ -202,8 +202,8 @@ public abstract class Character extends PhysicsEntity {
         if (meleeAttackTimer > MELEE_ATTACK_COOLDOWN){
             for (PhysicsEntity entity : enemiesInRange) {
                 if (Math.abs(vectorTo(entity.getCentre()).angle(direction)) < 45) {
-                    if (entity instanceof Character) {
-                        Character character = (Character) entity;
+                    if (entity instanceof TheCharacter) {
+                        TheCharacter character = (TheCharacter) entity;
                         character.damage(damage);
                         character.setVelocity(direction.cpy().setLength(40f));
                     } else if (entity instanceof Projectile){
@@ -240,7 +240,7 @@ public abstract class Character extends PhysicsEntity {
     @Override
     public void beginSensorContact(PhysicsEntity other, Contact contact) {
         super.beginSensorContact(other, contact);
-        if (other instanceof Character || (other instanceof Projectile && ((Projectile)other).getOwner() != this)) {
+        if (other instanceof TheCharacter || (other instanceof Projectile && ((Projectile)other).getOwner() != this)) {
             enemiesInRange.add(other);
         }
 

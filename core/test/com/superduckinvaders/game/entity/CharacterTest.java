@@ -2,7 +2,7 @@ package com.superduckinvaders.game.entity;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.superduckinvaders.game.Round;
-import com.superduckinvaders.game.entity.Character;
+import com.superduckinvaders.game.entity.TheCharacter;
 import com.superduckinvaders.game.util.LwjglTestRunner;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +17,7 @@ import static org.mockito.Mockito.mock;
  */
 @RunWith(LwjglTestRunner.class)
 public class CharacterTest {
-    private class MyCharacter extends Character {
+    private class MyCharacter extends TheCharacter {
         MyCharacter(Round round, int x, int y, int maxHealth) {
             super(round, x, y, maxHealth);
         }

@@ -64,8 +64,8 @@ public class Projectile extends PhysicsEntity {
     public void beginCollision(PhysicsEntity other, Contact contact){
         parent.createParticle(getCentre(), 0.6f, Assets.explosionAnimation);
         removed = true;
-        if (other instanceof Character && other != owner) {
-            ((Character) other).damage(damage);
+        if (other instanceof TheCharacter && other != owner) {
+            ((TheCharacter) other).damage(damage);
         }
     }
 

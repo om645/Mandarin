@@ -8,18 +8,28 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.ui.Table.Debug;
 import com.superduckinvaders.game.Round;
 import com.superduckinvaders.game.assets.Assets;
 import com.superduckinvaders.game.assets.TextureSet;
 
+
 import java.util.EnumMap;
 import java.util.Map;
+import java.io.Console;
+import java.lang.Character;
 
 /**
  * Represents the player of the game.
  */
-public class Player extends Character {
+public class Player extends TheCharacter {
 
+	////////////////////////////////////////////////////////////////////////////////
+	private String CheatArr="damndaniel";
+	private int CheatPtr=0;
+	private int SoftwareDebounce=10;
+	////////////////////////////////////////////////////////////////////////////////
+	
     /**
      * TEXTURE_OFFSET is a quick way to make certain animations less jumpy.
      */
@@ -342,6 +352,36 @@ public class Player extends Character {
             targetVelocity.y = -1f;
         }
 
+        ///////////////////////////////////////////////////////////////
+        if (SoftwareDebounce==0)
+        {
+	        boolean CheatSequence=true;
+	        int CheatKey=Character.getNumericValue(CheatArr.charAt(CheatPtr));
+	        for (int i=0;i<26;i++)
+	        {
+	        	if(Gdx.input.isKeyPressed(i+29) && i!=CheatKey-10)
+	        	{
+	        		CheatSequence=false;
+	        	}
+	        }
+	        if(Gdx.input.isKeyPressed(CheatKey+19) && CheatSequence)
+	        {
+	        	System.out.print(CheatArr.charAt(CheatPtr));
+	        	CheatPtr++;
+	        	if (CheatPtr>=CheatArr.length())
+	        	{
+	        		CheatPtr=0;
+	        		System.out.print("CHEATER!!!");
+	        		if (pickupMap.containsKey(Pickup.RATE_OF_FIRE)) pickupMap.remove(Pickup.RATE_OF_FIRE);
+	        		else pickupMap.put(Pickup.RATE_OF_FIRE, Float.POSITIVE_INFINITY);
+	        	}
+	        	SoftwareDebounce=10;
+	        }
+	        if(!CheatSequence) CheatPtr=0;
+        }
+        else SoftwareDebounce--;
+        ///////////////////////////////////////////////////////////////
+        
         // Calculate speed at which to move the player.
         float speed = PLAYER_SPEED * (hasPickup(Pickup.SUPER_SPEED) ? PLAYER_SUPER_SPEED_MULTIPLIER : 1);
 
