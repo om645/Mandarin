@@ -208,7 +208,12 @@ public class Player extends TheCharacter {
      * @param duration the amount of time the pickup applies.
      */
     public void givePickup(Pickup pickup, float duration){
-        pickupMap.put(pickup, duration);
+    	if (pickupMap.containsKey(pickup))
+    	{
+    		if (pickupMap.get(pickup)!=Float.POSITIVE_INFINITY)
+    		pickupMap.put(pickup, duration);
+    	}
+    	else pickupMap.put(pickup, duration);
     }
 
     /**
