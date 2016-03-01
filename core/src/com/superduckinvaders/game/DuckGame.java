@@ -38,6 +38,9 @@ public class DuckGame extends Game {
         public int maxUnlocked = 1;
         public int healthCounter = 6;
         public int totalScore = 0;
+        ///////////////////////////////////////////////////
+        public boolean shootingCheat = false;
+        ///////////////////////////////////////////////////
         public void incrementLevelCounter(){
             currentLevel += 1;
         }

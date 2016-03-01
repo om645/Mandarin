@@ -43,7 +43,7 @@ public class Round {
     /**
      * The GameTest instance this Round belongs to.
      */
-    private DuckGame parent;
+    public DuckGame parent;
 
     /**
      * The Round's map.

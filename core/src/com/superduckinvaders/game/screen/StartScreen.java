@@ -64,6 +64,17 @@ public class StartScreen extends BaseScreen {
 
             }
         });
+        
+        Button settingsButton = new Button(new Button.ButtonStyle(button, button, button));
+        settingsButton.setPosition((stage.getWidth() - mapButton.getPrefWidth()) / 2, 200);
+        settingsButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                dispose();
+                getGame().setScreen(new SettingsScreen(getGame()));
+
+            }
+        });
 
         Label.LabelStyle white = new Label.LabelStyle(Assets.font, Color.WHITE);
 
@@ -74,12 +85,18 @@ public class StartScreen extends BaseScreen {
         Label mapLabel = new Label("LEVEL SELECT", white);
         mapLabel.setPosition((stage.getWidth() - mapLabel.getPrefWidth()) / 2, 265);
         mapLabel.setTouchable(Touchable.disabled);
+        
+        Label settingsLabel = new Label("CHEATS", white);
+        settingsLabel.setPosition((stage.getWidth() - settingsLabel.getPrefWidth()) / 2, 215);
+        settingsLabel.setTouchable(Touchable.disabled);
 
         stage.addActor(logoImage);
         stage.addActor(playButton);
         stage.addActor(playLabel);
         stage.addActor(mapButton);
         stage.addActor(mapLabel);
+        stage.addActor(settingsButton);
+        stage.addActor(settingsLabel);
     }
 
     /**
