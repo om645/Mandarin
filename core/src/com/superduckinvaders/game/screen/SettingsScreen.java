@@ -63,6 +63,7 @@ public class SettingsScreen extends BaseScreen {
         startLabel.setPosition((stage.getWidth() - startLabel.getPrefWidth()) / 2, 600);
         startLabel.setTouchable(Touchable.disabled);
         
+        // Rapid fire cheat button
         Button shootingButton = new Button(new Button.ButtonStyle(button, button, button));
         shootingButton.setPosition((stage.getWidth() - shootingButton.getPrefWidth()) /2, 485);
         shootingButton.addListener(new ClickListener() {
@@ -82,10 +83,33 @@ public class SettingsScreen extends BaseScreen {
         shootingLabel.setPosition((stage.getWidth() - shootingLabel.getPrefWidth()) / 2, 500);
         shootingLabel.setTouchable(Touchable.disabled);
         
+        
+        // No hitbox cheat button
+        Button noHitboxButton = new Button(new Button.ButtonStyle(button, button, button));
+        noHitboxButton.setPosition((stage.getWidth() - noHitboxButton.getPrefWidth()) /2, 370);
+        noHitboxButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                dispose();
+                getGame().session.noHitboxCheat=!getGame().session.noHitboxCheat;
+                getGame().setScreen(new SettingsScreen(getGame()));
+            }
+        });
+        
+        String noHitboxButtonText="WALK THROUGH WALLS: ";
+        
+        if (getGame().session.noHitboxCheat) noHitboxButtonText+="ON";
+        else shootingLabelText+="OFF";
+        Label noHitboxLabel = new Label(noHitboxButtonText, white);
+        noHitboxLabel.setPosition((stage.getWidth() - shootingLabel.getPrefWidth()) / 2, 385);
+        noHitboxLabel.setTouchable(Touchable.disabled);
+
         stage.addActor(startButton);
         stage.addActor(startLabel);
         stage.addActor(shootingButton);
         stage.addActor(shootingLabel);
+        stage.addActor(noHitboxButton);
+        stage.addActor(noHitboxLabel);
     }
 
     /**
