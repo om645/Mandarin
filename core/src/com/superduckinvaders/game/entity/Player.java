@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.physics.box2d.Contact;
+import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.scenes.scene2d.ui.Table.Debug;
 import com.superduckinvaders.game.DuckGame;
 import com.superduckinvaders.game.Round;
@@ -499,4 +501,13 @@ public class Player extends TheCharacter {
         }
     }
     
+    // Remove collision detection with cheat
+    @Override
+    public void preSolve(PhysicsEntity other , Contact contact, Manifold manifold) {
+    	if (DuckGame.session.noHitboxCheat){
+    		contact.setEnabled(false);
+    	} else{
+    		contact.setEnabled(true);
+    	}
+    }
 }
