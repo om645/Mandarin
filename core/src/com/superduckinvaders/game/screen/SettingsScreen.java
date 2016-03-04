@@ -74,10 +74,10 @@ public class SettingsScreen extends BaseScreen {
             }
         });
         
-        String shootingLabelText="Turn Fast Shooting Cheat ";
+        String shootingLabelText="RAPID FIRE ";
         
-        if (getGame().session.shootingCheat) shootingLabelText+="Off";
-        else shootingLabelText+="On";
+        if (getGame().session.shootingCheat) shootingLabelText+="ON";
+        else shootingLabelText+="OFF";
         Label shootingLabel = new Label(shootingLabelText, white);
         shootingLabel.setPosition((stage.getWidth() - shootingLabel.getPrefWidth()) / 2, 500);
         shootingLabel.setTouchable(Touchable.disabled);
