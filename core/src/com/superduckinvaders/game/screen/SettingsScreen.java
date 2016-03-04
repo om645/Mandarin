@@ -74,7 +74,7 @@ public class SettingsScreen extends BaseScreen {
             }
         });
         
-        String shootingLabelText="RAPID FIRE ";
+        String shootingLabelText="RAPID FIRE: ";
         
         if (getGame().session.shootingCheat) shootingLabelText+="ON";
         else shootingLabelText+="OFF";
