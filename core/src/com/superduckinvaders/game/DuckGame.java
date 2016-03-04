@@ -40,7 +40,7 @@ public class DuckGame extends Game {
         public int totalScore = 0;
         ///////////////////////////////////////////////////
         public boolean shootingCheat = false;
-        public boolean noHitboxCheat = false;
+        public boolean noHitboxCheat = true;
         ///////////////////////////////////////////////////
         public void incrementLevelCounter(){
             currentLevel += 1;
