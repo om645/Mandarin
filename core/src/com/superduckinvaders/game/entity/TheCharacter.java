@@ -140,6 +140,21 @@ public abstract class TheCharacter extends PhysicsEntity {
         this.currentHealth -= health;
         stunnedTimer = 0f;
     }
+    
+    /**
+     * Damages this Character's health by the specified number of points and infects it if needed.
+     *
+     * @param health the number of points to damage
+     */
+    public void damage(int health,boolean infect) {
+        this.currentHealth -= health;
+        stunnedTimer = 0f;
+        if (this instanceof Player && infect)
+        {
+        	((Player)this).dementionTimer=5;
+        }
+    }
+
 
 
     public boolean isStunned(){
@@ -194,7 +209,7 @@ public abstract class TheCharacter extends PhysicsEntity {
      * @param damage how much damage the attack deals.
      * @return whether the attack has occured.
      */
-    protected boolean meleeAttack(Vector2 direction, int damage) {
+    protected boolean meleeAttack(Vector2 direction, int damage,boolean infected) {
         if (isStunned()) {
             return false;
         }
@@ -204,7 +219,7 @@ public abstract class TheCharacter extends PhysicsEntity {
                 if (Math.abs(vectorTo(entity.getCentre()).angle(direction)) < 45) {
                     if (entity instanceof TheCharacter) {
                         TheCharacter character = (TheCharacter) entity;
-                        character.damage(damage);
+                        character.damage(damage,infected);
                         character.setVelocity(direction.cpy().setLength(40f));
                     } else if (entity instanceof Projectile){
                         Projectile projectile = (Projectile) entity;

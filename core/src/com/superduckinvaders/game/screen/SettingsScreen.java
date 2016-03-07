@@ -99,9 +99,9 @@ public class SettingsScreen extends BaseScreen {
         String noHitboxButtonText="WALK THROUGH WALLS: ";
         
         if (getGame().session.noHitboxCheat) noHitboxButtonText+="ON";
-        else shootingLabelText+="OFF";
+        else noHitboxButtonText+="OFF";
         Label noHitboxLabel = new Label(noHitboxButtonText, white);
-        noHitboxLabel.setPosition((stage.getWidth() - shootingLabel.getPrefWidth()) / 2, 385);
+        noHitboxLabel.setPosition((stage.getWidth() - noHitboxLabel.getPrefWidth()) / 2, 385);
         noHitboxLabel.setTouchable(Touchable.disabled);
 
         stage.addActor(startButton);

@@ -14,6 +14,7 @@ import com.superduckinvaders.game.entity.item.Item;
 import com.superduckinvaders.game.entity.item.PickupItem;
 import com.superduckinvaders.game.entity.mob.BossMob;
 import com.superduckinvaders.game.entity.mob.GunnerMob;
+import com.superduckinvaders.game.entity.mob.InfectedMob;
 import com.superduckinvaders.game.entity.mob.Mob;
 import com.superduckinvaders.game.entity.mob.ZombieMob;
 import com.superduckinvaders.game.objective.CollectObjective;
@@ -298,12 +299,20 @@ public class Round {
         for (int i = 0; i < amount;) {
             int x = MathUtils.random(minX, maxX);
             int y = MathUtils.random(minY, maxY);
+            float randNum = MathUtils.random();
             if (!collidePoint(x, y))
-                if (MathUtils.random()>0.2) {
+                if (randNum>0.4) {
                     addMob(new ZombieMob(this, x, y));
+                    //addMob(new InfectedMob(this, x, y));
                 }
                 else {
-                    addMob(new GunnerMob(this, x, y));
+                	if (randNum>0.2) {
+                		addMob(new GunnerMob(this, x, y));
+                	}
+                	else{
+                		//addMob(new ZombieMob(this, x, y));
+                		addMob(new InfectedMob(this, x, y));
+                	}         
                 }
                 i++;
         }

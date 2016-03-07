@@ -35,7 +35,7 @@ public class Assets {
     /**
      *  Bad guy texture set.
      */
-    public static TextureSet rangedBadGuyNormal, badGuyNormal;
+    public static TextureSet rangedBadGuyNormal, badGuyNormal,infectedBadGuyNormal;
 
     /**
      *  Texture for Projectile.
@@ -211,9 +211,19 @@ public class Assets {
         Animation rangedWalkingBack  = loadAnimation("textures/ranged_badguy_walking_back.png", 4, 0.2f);
         Animation rangedWalkingLeft  = loadAnimation("textures/ranged_badguy_walking_left.png", 4, 0.2f);
         Animation rangedWalkingRight = loadAnimation("textures/ranged_badguy_walking_right.png", 4, 0.2f);
+        
+        //Load idle texture map.
+        TextureRegion[] infectedIdle = TextureRegion.split(loadTexture("textures/infected_badguy_idle.png"), 21, 24)[0];
+        
+        // Load walking animations.
+        Animation infectedWalkingFront = loadAnimation("textures/infected_badguy_walking_front.png", 4, 0.2f);
+        Animation infectedWalkingBack  = loadAnimation("textures/infected_badguy_walking_back.png", 4, 0.2f);
+        Animation infectedWalkingLeft  = loadAnimation("textures/infected_badguy_walking_left.png", 4, 0.2f);
+        Animation infectedWalkingRight = loadAnimation("textures/infected_badguy_walking_right.png", 4, 0.2f);
 
         badGuyNormal       = new TextureSet(idle[0], idle[1], idle[2], idle[3], walkingFront, walkingBack, walkingLeft, walkingRight);
         rangedBadGuyNormal = new TextureSet(rangedIdle[0], rangedIdle[1], rangedIdle[2], rangedIdle[3], rangedWalkingFront, rangedWalkingBack, rangedWalkingLeft, rangedWalkingRight);
+        infectedBadGuyNormal = new TextureSet(infectedIdle[0],infectedIdle[1],infectedIdle[2],infectedIdle[3],infectedWalkingFront,infectedWalkingBack,infectedWalkingLeft,infectedWalkingRight);
 
         TextureRegion[] idleBoss = TextureRegion.split(loadTexture("textures/ranged_mechaboss_idle.png"), 42, 48)[0];
 

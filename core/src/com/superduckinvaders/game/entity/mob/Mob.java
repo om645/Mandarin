@@ -25,6 +25,13 @@ public class Mob extends TheCharacter {
      */
     private AI ai;
 
+    
+    /**
+     * If mob can infect player
+     */
+    protected boolean infecting = false;
+
+    
     /**
      * speed of the mob in pixels per second
      */

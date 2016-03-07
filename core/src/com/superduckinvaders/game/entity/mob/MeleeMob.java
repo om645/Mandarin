@@ -33,7 +33,7 @@ public class MeleeMob extends Mob {
         super.update(delta);
         if (!enemiesInRange.isEmpty()) {
             for (PhysicsEntity entity : enemiesInRange) {
-                meleeAttack(vectorTo(entity.getCentre()), 1);
+                meleeAttack(vectorTo(entity.getCentre()), 1,infecting);
             }
         }
     }

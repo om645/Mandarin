@@ -27,13 +27,6 @@ import java.lang.Character;
  */
 public class Player extends TheCharacter {
 
-	////////////////////////////////////////////////////////////////////////////////
-	/*
-	private String CheatArr="damndaniel";
-	private int CheatPtr=0;
-	private int SoftwareDebounce=10;
-	*/
-	////////////////////////////////////////////////////////////////////////////////
 	
     /**
      * TEXTURE_OFFSET is a quick way to make certain animations less jumpy.
@@ -119,6 +112,12 @@ public class Player extends TheCharacter {
      * The weapon currently being used.
      */
     protected Pickup currentWeapon = Pickup.GUN;
+    
+
+    /**
+     * Demention timer.
+     */
+    public float dementionTimer =0;
 
     /**
      * Initialises this Player at the specified coordinates and with the specified initial health.
@@ -231,8 +230,8 @@ public class Player extends TheCharacter {
     }
 
     @Override
-    protected boolean meleeAttack(Vector2 direction, int damage) {
-        if (super.meleeAttack(direction, damage)) {
+    protected boolean meleeAttack(Vector2 direction, int damage,boolean infected) {
+        if (super.meleeAttack(direction, damage,infected)) {
             currentWeapon = Pickup.LIGHTSABER;
             setAttackAnimation((stateTime > 0 ? Assets.playerWalkingAttackSaber :Assets.playerStaticAttackSaber)
                     .getAnimation(facing));
@@ -281,6 +280,18 @@ public class Player extends TheCharacter {
     @Override
     public void update(float delta) {
         attackAnimationTimer += delta;
+        
+        if (this instanceof Player && ((Player)this).dementionTimer>0)
+        {
+        	if (((Player)this).dementionTimer-delta<0)
+        	{
+        		((Player)this).dementionTimer=0;
+        	}
+        	else
+        	{
+        		((Player)this).dementionTimer-=delta;
+        	}
+        }
 
         if (isFlying()){
             state = State.FLYING;
@@ -327,7 +338,7 @@ public class Player extends TheCharacter {
         if (! isFlying() && !isSwimming()) {
             if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) && hasPickup(Pickup.LIGHTSABER)) {
                 Vector3 target = parent.unproject(Gdx.input.getX(), Gdx.input.getY());
-                meleeAttack(vectorTo(new Vector2(target.x, target.y)), 1);
+                meleeAttack(vectorTo(new Vector2(target.x, target.y)), 1,false);
             }
             else if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT) && hasPickup(Pickup.GUN)) {
                 Vector3 target = parent.unproject(Gdx.input.getX(), Gdx.input.getY());
@@ -362,38 +373,11 @@ public class Player extends TheCharacter {
         if (Gdx.input.isKeyPressed(Input.Keys.S)) {
             targetVelocity.y = -1f;
         }
-
-        //////////////////////////////////////////////////////////////
-        /*
-        if (SoftwareDebounce==0)
+        if (dementionTimer>0)
         {
-	        boolean CheatSequence=true;
-	        int CheatKey=Character.getNumericValue(CheatArr.charAt(CheatPtr));
-	        for (int i=0;i<26;i++)
-	        {
-	        	if(Gdx.input.isKeyPressed(i+29) && i!=CheatKey-10)
-	        	{
-	        		CheatSequence=false;
-	        	}
-	        }
-	        if(Gdx.input.isKeyPressed(CheatKey+19) && CheatSequence)
-	        {
-	        	System.out.print(CheatArr.charAt(CheatPtr));
-	        	CheatPtr++;
-	        	if (CheatPtr>=CheatArr.length())
-	        	{
-	        		CheatPtr=0;
-	        		System.out.print("CHEATER!!!");
-	        		if (pickupMap.containsKey(Pickup.RATE_OF_FIRE)) pickupMap.remove(Pickup.RATE_OF_FIRE);
-	        		else pickupMap.put(Pickup.RATE_OF_FIRE, Float.POSITIVE_INFINITY);
-	        	}
-	        	SoftwareDebounce=10;
-	        }
-	        if(!CheatSequence) CheatPtr=0;
+        	targetVelocity.x=-targetVelocity.x;
+        	targetVelocity.y=-targetVelocity.y;
         }
-        else SoftwareDebounce--;
-       */
-       //////////////////////////////////////////////////////////////
         
         // Calculate speed at which to move the player.
         float speed = PLAYER_SPEED * (hasPickup(Pickup.SUPER_SPEED) ? PLAYER_SUPER_SPEED_MULTIPLIER : 1);
