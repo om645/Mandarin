@@ -150,7 +150,7 @@ public class GameScreen extends BaseScreen {
         debugRenderer = new Box2DDebugRenderer();
         
         ShaderProgram.pedantic = false;
-        standardShader = new ShaderProgram(Gdx.files.internal("shaders/passthrough.vsh"), Gdx.files.internal("shaders/passthrough.fsh"));
+        standardShader = null; //new ShaderProgram(Gdx.files.internal("shaders/passthrough.vsh"), Gdx.files.internal("shaders/passthrough.fsh")); // Passthrough shader does nothing to affect the screen.
         dementedShader = new ShaderProgram(Gdx.files.internal("shaders/invert.vsh"), Gdx.files.internal("shaders/invert.fsh"));
 //        System.out.println(shader.isCompiled() ? "shader compiled successfully" : shader.getLog());
         setShader(standardShader);
@@ -394,6 +394,8 @@ public class GameScreen extends BaseScreen {
     }
     
     public void setShader(ShaderProgram shader){
-        mapRenderer.getBatch().setShader(shader);
+    	if (shader != mapRenderer.getBatch().getShader()){
+    		mapRenderer.getBatch().setShader(shader);
+        }
     }
 }
