@@ -152,6 +152,7 @@ public abstract class TheCharacter extends PhysicsEntity {
         if (this instanceof Player && infect)
         {
         	((Player)this).dementionTimer=5;
+        	parent.gameScreen.setShader(parent.gameScreen.dementedShader);
         }
     }
 

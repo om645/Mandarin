@@ -118,7 +118,7 @@ public class Player extends TheCharacter {
     /**
      * Demention timer.
      */
-    public float dementionTimer =0;
+    public float dementionTimer = 0;
 
     /**
      * Initialises this Player at the specified coordinates and with the specified initial health.
@@ -284,12 +284,10 @@ public class Player extends TheCharacter {
         
         if (this instanceof Player && ((Player)this).dementionTimer>0)
         {
-        	if (((Player)this).dementionTimer-delta<0)
-        	{
+        	if (((Player)this).dementionTimer-delta<0) {
         		((Player)this).dementionTimer=0;
-        	}
-        	else
-        	{
+            	parent.gameScreen.setShader(parent.gameScreen.standardShader);
+        	} else {
         		((Player)this).dementionTimer-=delta;
         	}
         }
@@ -374,13 +372,12 @@ public class Player extends TheCharacter {
         if (Gdx.input.isKeyPressed(Input.Keys.S)) {
             targetVelocity.y = -1f;
         }
+        
+        // Demented mode
         if (dementionTimer>0)
         {
         	targetVelocity.x=-targetVelocity.x;
         	targetVelocity.y=-targetVelocity.y;
-        	parent.gameScreen.setShader(parent.gameScreen.dementedShader);
-        } else{
-        	parent.gameScreen.setShader(parent.gameScreen.standardShader);
         }
         
         // Calculate speed at which to move the player.
