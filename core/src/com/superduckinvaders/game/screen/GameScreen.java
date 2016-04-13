@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -40,6 +41,8 @@ public class GameScreen extends BaseScreen {
     private SpriteBatch spriteBatch, uiBatch;
     private OrthographicCamera uiCamera;
     private Viewport uiViewport;
+    public ShaderProgram standardShader;
+    public ShaderProgram dementedShader;
 
     /**
      * The Round this GameScreen renders.
@@ -145,7 +148,12 @@ public class GameScreen extends BaseScreen {
         mapRenderer = new OrthogonalTiledMapRenderer(round.getMap(), spriteBatch);
         
         debugRenderer = new Box2DDebugRenderer();
-
+        
+        ShaderProgram.pedantic = false;
+        standardShader = new ShaderProgram(Gdx.files.internal("shaders/passthrough.vsh"), Gdx.files.internal("shaders/passthrough.fsh"));
+        dementedShader = new ShaderProgram(Gdx.files.internal("shaders/invert.vsh"), Gdx.files.internal("shaders/invert.fsh"));
+//        System.out.println(shader.isCompiled() ? "shader compiled successfully" : shader.getLog());
+        setShader(standardShader);
     }
 
     @Override
@@ -383,5 +391,9 @@ public class GameScreen extends BaseScreen {
     }
 
     private class MinimapViewport extends Viewport {
+    }
+    
+    public void setShader(ShaderProgram shader){
+        mapRenderer.getBatch().setShader(shader);
     }
 }

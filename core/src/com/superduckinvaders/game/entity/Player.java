@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
@@ -15,7 +16,7 @@ import com.superduckinvaders.game.DuckGame;
 import com.superduckinvaders.game.Round;
 import com.superduckinvaders.game.assets.Assets;
 import com.superduckinvaders.game.assets.TextureSet;
-
+import com.superduckinvaders.game.screen.GameScreen;
 
 import java.util.EnumMap;
 import java.util.Map;
@@ -377,6 +378,9 @@ public class Player extends TheCharacter {
         {
         	targetVelocity.x=-targetVelocity.x;
         	targetVelocity.y=-targetVelocity.y;
+        	parent.gameScreen.setShader(parent.gameScreen.dementedShader);
+        } else{
+        	parent.gameScreen.setShader(parent.gameScreen.standardShader);
         }
         
         // Calculate speed at which to move the player.

@@ -16,6 +16,7 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.width = 1280;
 		config.height = 720;
+//		config.useGL30 = true;
 		config.resizable = true;
 		config.title = "SUPER DUCK INVADERS! - Team Mandarin";
 		new LwjglApplication(new DuckGame(), config);
