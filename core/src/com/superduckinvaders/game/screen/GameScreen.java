@@ -41,6 +41,10 @@ public class GameScreen extends BaseScreen {
     private SpriteBatch spriteBatch, uiBatch;
     private OrthographicCamera uiCamera;
     private Viewport uiViewport;
+    
+    /**
+     * Shaders
+     */
     public ShaderProgram standardShader;
     public ShaderProgram dementedShader;
 

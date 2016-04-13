@@ -361,20 +361,36 @@ public class Player extends TheCharacter {
         Vector2 targetVelocity = new Vector2();
         
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-            targetVelocity.x += -1f;
+        	if (getPosition().x - getWidth() > 0){
+        		targetVelocity.x = -1f; // Was +=, change back?
+        	} else {
+        		targetVelocity.x = 0f;
+        	}
         }
         if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-            targetVelocity.x += 1f;
+        	if (getPosition().x + 2*getWidth() < parent.getMapWidth()){
+                targetVelocity.x = 1f; // Was +=, change back?
+        	} else {
+        		targetVelocity.x = 0f;
+        	}
         }
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-            targetVelocity.y = 1f;
+        	if (getPosition().y + getHeight()*1.5 < parent.getMapHeight()){
+        		targetVelocity.y = 1f;
+        	} else {
+        		targetVelocity.y = 0f;
+        	}
         }
         if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-            targetVelocity.y = -1f;
+        	if (getPosition().y - getHeight()/2 > 0){
+        		targetVelocity.y = -1f;
+        	} else {
+        		targetVelocity.y = 0f;
+        	}
         }
         
         // Demented mode
-        if (dementionTimer>0)
+        if (dementionTimer>0) // TODO Currently it is possible to leave the edge of the screen in demented mode because the checking is based on the key you press and this just reverses it.
         {
         	targetVelocity.x=-targetVelocity.x;
         	targetVelocity.y=-targetVelocity.y;
