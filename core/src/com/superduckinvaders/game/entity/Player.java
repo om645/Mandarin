@@ -488,11 +488,9 @@ public class Player extends TheCharacter {
     
     // Remove collision detection with cheat
     @Override
-    public void preSolve(PhysicsEntity other , Contact contact, Manifold manifold) {
+    public void preSolve(PhysicsEntity other, Contact contact, Manifold manifold) {
     	if (DuckGame.session.noHitboxCheat){
     		contact.setEnabled(false);
-    	} else{
-    		contact.setEnabled(true);
     	}
     }
 }
