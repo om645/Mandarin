@@ -92,5 +92,13 @@ public class DuckGame extends Game {
             PixmapIO.writePNG(Gdx.files.external("DuckInvaders/" + new SimpleDateFormat("SS-ss-mm-HH").format(new Date()) + ".png"), pixmap);
             pixmap.dispose();
         }
+        
+        if (Gdx.input.isKeyJustPressed(Input.Keys.M)){
+        	if (Assets.menuTheme.isPlaying()){
+        		Assets.menuTheme.pause();
+        	} else {
+        		Assets.menuTheme.play();
+        	}
+        }
     }
 }
