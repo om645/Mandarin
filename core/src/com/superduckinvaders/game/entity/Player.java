@@ -361,40 +361,34 @@ public class Player extends TheCharacter {
         Vector2 targetVelocity = new Vector2();
         
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-        	if (getPosition().x - getWidth() > 0){
-        		targetVelocity.x = -1f; // Was +=, change back?
-        	} else {
-        		targetVelocity.x = 0f;
-        	}
+        	targetVelocity.x = -1f; // Was +=, change back?
         }
         if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-        	if (getPosition().x + 2*getWidth() < parent.getMapWidth()){
-                targetVelocity.x = 1f; // Was +=, change back?
-        	} else {
-        		targetVelocity.x = 0f;
-        	}
+        	targetVelocity.x = 1f; // Was +=, change back?
         }
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-        	if (getPosition().y + getHeight()*1.5 < parent.getMapHeight()){
-        		targetVelocity.y = 1f;
-        	} else {
-        		targetVelocity.y = 0f;
-        	}
+        	targetVelocity.y = 1f;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-        	if (getPosition().y - getHeight()/2 > 0){
-        		targetVelocity.y = -1f;
-        	} else {
-        		targetVelocity.y = 0f;
-        	}
+        	targetVelocity.y = -1f;
         }
         
         // Demented mode
-        if (dementionTimer>0) // TODO Currently it is possible to leave the edge of the screen in demented mode because the checking is based on the key you press and this just reverses it.
-        {
+        if (dementionTimer>0) {
         	targetVelocity.x=-targetVelocity.x;
         	targetVelocity.y=-targetVelocity.y;
         }
+        
+        // Stop walking off edge of screen in demented mode
+        if (getPosition().x - getWidth()      < 0                     && targetVelocity.x < 0f ||
+        	getPosition().x + getWidth()*2    > parent.getMapWidth()  && targetVelocity.x > 0f) {
+        	targetVelocity.x = 0f;
+        }
+        if (getPosition().y + getHeight()*1.5 > parent.getMapHeight() && targetVelocity.y > 0f ||
+        	getPosition().y - getHeight()/2   < 0                     && targetVelocity.y < 0f) {
+        	targetVelocity.y = 0f;
+        }
+        
         
         // Calculate speed at which to move the player.
         float speed = PLAYER_SPEED * (hasPickup(Pickup.SUPER_SPEED) ? PLAYER_SUPER_SPEED_MULTIPLIER : 1);
