@@ -128,8 +128,8 @@ public class Round {
         }
 
         // Mob spawning
-        if (parent.session.currentLevel != 8) {
-        	if(parent.session.shootingCheat)spawnRandomMobs(300, 0, 0, getMapWidth(), getMapHeight());
+       if (parent.session.currentLevel != 8) {
+        	if(parent.session.shootingCheat)spawnRandomMobs(100, 0, 0, getMapWidth(), getMapHeight());
         	else spawnRandomMobs(50, 0, 0, getMapWidth(), getMapHeight());
         }
         else {
@@ -144,7 +144,7 @@ public class Round {
             }
         }
 
-        System.out.println(map.getProperties().get("Objective", "collect", String.class));
+        //System.out.println(map.getProperties().get("Objective", "collect", String.class));
         //
         switch (map.getProperties().get("Objective", "collect", String.class)){
             case "survive":
