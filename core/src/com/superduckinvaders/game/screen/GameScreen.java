@@ -261,6 +261,7 @@ public class GameScreen extends BaseScreen {
 
         mapRenderer.setView(minimapCamera);
         drawMap();
+        if (!DuckGame.session.noHitboxCheat)
         drawOverhang();
 
 
@@ -289,7 +290,7 @@ public class GameScreen extends BaseScreen {
     }
 
     private void drawMap() {
-        for (TiledMapTileLayer layer : new TiledMapTileLayer[]{round.getBaseLayer(), round.getWaterLayer(), round.getCollisionLayer()}) {
+        for (TiledMapTileLayer layer : new TiledMapTileLayer[]{round.getBaseLayer(), round.getWaterLayer(), round.getBase2Layer(), round.getCollisionLayer()}) {
             if (layer != null) {
                 mapRenderer.renderTileLayer(layer);
             }
@@ -319,7 +320,8 @@ public class GameScreen extends BaseScreen {
         // Draw all entities.
         for (Entity entity : round.getEntities())
             entity.render(spriteBatch);
-
+        
+        if (!DuckGame.session.noHitboxCheat)
         drawOverhang();
     }
 

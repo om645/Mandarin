@@ -144,11 +144,12 @@ public class Round {
             }
         }
 
-
+        System.out.println(map.getProperties().get("Objective", "collect", String.class));
         //
         switch (map.getProperties().get("Objective", "collect", String.class)){
             case "survive":
                 setObjective (new SurviveObjective(this));
+                break;
             case "collect":
                 int objectiveX = Integer.parseInt(map.getProperties().get("ObjectiveX", "10", String.class)) * getTileWidth();
                 int objectiveY = Integer.parseInt(map.getProperties().get("ObjectiveY", "10", String.class)) * getTileHeight();
@@ -366,6 +367,14 @@ public class Round {
      */
     public TiledMapTileLayer getOverhangLayer() {
         return (TiledMapTileLayer) getMap().getLayers().get("Overhang");
+    }
+    
+    /**
+     * gets the base2 layer of the map
+     * @return this Round's base2 map layer (rendered over entities)
+     */
+    public TiledMapTileLayer getBase2Layer() {
+        return (TiledMapTileLayer) getMap().getLayers().get("Base2");
     }
 
     /**
