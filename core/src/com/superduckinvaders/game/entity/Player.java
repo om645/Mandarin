@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
@@ -15,7 +16,7 @@ import com.superduckinvaders.game.DuckGame;
 import com.superduckinvaders.game.Round;
 import com.superduckinvaders.game.assets.Assets;
 import com.superduckinvaders.game.assets.TextureSet;
-
+import com.superduckinvaders.game.screen.GameScreen;
 
 import java.util.EnumMap;
 import java.util.Map;
@@ -117,7 +118,7 @@ public class Player extends TheCharacter {
     /**
      * Demention timer.
      */
-    public float dementionTimer =0;
+    public float dementionTimer = 0;
 
     /**
      * Initialises this Player at the specified coordinates and with the specified initial health.
@@ -283,12 +284,10 @@ public class Player extends TheCharacter {
         
         if (this instanceof Player && ((Player)this).dementionTimer>0)
         {
-        	if (((Player)this).dementionTimer-delta<0)
-        	{
+        	if (((Player)this).dementionTimer-delta<0) {
         		((Player)this).dementionTimer=0;
-        	}
-        	else
-        	{
+            	parent.gameScreen.setShader(parent.gameScreen.standardShader);
+        	} else {
         		((Player)this).dementionTimer-=delta;
         	}
         }
@@ -362,22 +361,34 @@ public class Player extends TheCharacter {
         Vector2 targetVelocity = new Vector2();
         
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-            targetVelocity.x += -1f;
+        	targetVelocity.x = -1f; // Was +=, change back?
         }
         if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-            targetVelocity.x += 1f;
+        	targetVelocity.x = 1f; // Was +=, change back?
         }
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-            targetVelocity.y = 1f;
+        	targetVelocity.y = 1f;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-            targetVelocity.y = -1f;
+        	targetVelocity.y = -1f;
         }
-        if (dementionTimer>0)
-        {
+        
+        // Demented mode
+        if (dementionTimer>0) {
         	targetVelocity.x=-targetVelocity.x;
         	targetVelocity.y=-targetVelocity.y;
         }
+        
+        // Stop walking off edge of screen in demented mode
+        if (getPosition().x - getWidth()      < 0                     && targetVelocity.x < 0f ||
+        	getPosition().x + getWidth()*2    > parent.getMapWidth()  && targetVelocity.x > 0f) {
+        	targetVelocity.x = 0f;
+        }
+        if (getPosition().y + getHeight()*1.5 > parent.getMapHeight() && targetVelocity.y > 0f ||
+        	getPosition().y - getHeight()/2   < 0                     && targetVelocity.y < 0f) {
+        	targetVelocity.y = 0f;
+        }
+        
         
         // Calculate speed at which to move the player.
         float speed = PLAYER_SPEED * (hasPickup(Pickup.SUPER_SPEED) ? PLAYER_SUPER_SPEED_MULTIPLIER : 1);
@@ -487,11 +498,9 @@ public class Player extends TheCharacter {
     
     // Remove collision detection with cheat
     @Override
-    public void preSolve(PhysicsEntity other , Contact contact, Manifold manifold) {
+    public void preSolve(PhysicsEntity other, Contact contact, Manifold manifold) {
     	if (DuckGame.session.noHitboxCheat){
     		contact.setEnabled(false);
-    	} else{
-    		contact.setEnabled(true);
     	}
     }
 }

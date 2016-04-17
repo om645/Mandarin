@@ -3,7 +3,9 @@ package com.superduckinvaders.game.ai;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.superduckinvaders.game.DuckGame;
 import com.superduckinvaders.game.Round;
+import com.superduckinvaders.game.assets.TextureSet;
 import com.superduckinvaders.game.entity.mob.Mob;
 
 import java.util.ArrayList;
@@ -65,7 +67,19 @@ public class PathfindingAI extends AI {
      * The Coordinate for the AI to find a path for.
      */
     public Coordinate target;
-
+    //////////////////////////////////////////////////////
+    /**
+     * The Coordinate for the AI to find a path for.
+     */
+    
+    public int[][] possibleDir = {{3,0,1},{0,1,2},{1,2,3},{2,3,0}};
+    
+    /**
+     * Possible allowed directions
+     */
+    
+    public int[] allowedDir = {0,1,2};
+	//////////////////////////////////////////////////////
     /**
      * Initialises this PathfindingAI.
      *
@@ -89,7 +103,8 @@ public class PathfindingAI extends AI {
     @Override
     public void update(Mob mob, float delta) {
         playerPos = round.getPlayer().getCentre();
-
+        TextureSet.FaceDirection lastDir = round.getPlayer().getFacing();
+        
         float distanceToPlayer = mob.distanceTo(playerPos);
         float distanceToTargetTile = (target != null) ? mob.getCentre().sub(target.vector()).len() : 0f;
         
@@ -97,7 +112,21 @@ public class PathfindingAI extends AI {
         if ((currentOffset >= deltaOffsetLimit || distanceToTargetTile < 2) && (int) distanceToPlayer < 1280 / 4) {
             deltaOffsetLimit = PATHFINDING_RATE + (MathUtils.random() % PATHFINDING_RATE_OFFSET);
             currentOffset = 0;
-            target = FindPath(mob);
+            //////////////////////////////////////////////////////////
+            switch(lastDir){
+            	case BACK : allowedDir=possibleDir[0];
+            	break;
+            	case RIGHT : allowedDir=possibleDir[1];
+            	break;
+            	case FRONT : allowedDir=possibleDir[2];
+            	break;
+            	case LEFT : allowedDir=possibleDir[3];
+            	break;
+            }
+
+            if (round.getPlayer().dementionTimer==0) target = FindPath(mob);
+            else target = FindRandPath(mob);
+            //////////////////////////////////////////////////////////
         }
         
         // targetPoint = (target != null) ? target.vector() : new Vector2(playerPos).setLength(1f);
@@ -105,8 +134,22 @@ public class PathfindingAI extends AI {
             mob.applyVelocity(target.vector());
         }
     }
-
-    /**
+//////////////////////////////////////////////////////////
+    private Coordinate FindRandPath(Mob mob) {
+    	Coordinate currentCoord = roundToTile(mob.getCentre());
+    	Coordinate[] perm = {
+                new Coordinate(currentCoord.x,             currentCoord.y + tileHeight),
+                new Coordinate(currentCoord.x + tileWidth, currentCoord.y             ),
+                new Coordinate(currentCoord.x,             currentCoord.y - tileHeight),
+                new Coordinate(currentCoord.x - tileWidth, currentCoord.y             )
+            };
+    	float randRes = MathUtils.random();
+    	if (randRes<0.2f) return perm[allowedDir[0]];
+    	if (randRes<0.8f) return perm[allowedDir[1]];
+    	else return perm[allowedDir[2]];
+	}
+//////////////////////////////////////////////////////////
+	/**
      * A variation of A* algorithm. Returns a meaningful target coordinate as a pair of integers.
      * Recalculated every tick as player might move and change pathfinding coordinates.
      *

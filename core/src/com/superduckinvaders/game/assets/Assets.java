@@ -256,7 +256,7 @@ public class Assets {
     }
 
     /**
-     * Loads the tile map from the specifed file.
+     * Loads the tile map from the specified file.
      *
      * @param file the file to load from
      * @return the tile map

@@ -40,7 +40,7 @@ public class DuckGame extends Game {
         public int totalScore = 0;
         ///////////////////////////////////////////////////
         public boolean shootingCheat = false;
-        public boolean noHitboxCheat = false;
+		public boolean noHitboxCheat = false;
         ///////////////////////////////////////////////////
         public void incrementLevelCounter(){
             currentLevel += 1;
@@ -91,6 +91,14 @@ public class DuckGame extends Game {
             BufferUtils.copy(pixels, 0, pixmap.getPixels(), pixels.length);
             PixmapIO.writePNG(Gdx.files.external("DuckInvaders/" + new SimpleDateFormat("SS-ss-mm-HH").format(new Date()) + ".png"), pixmap);
             pixmap.dispose();
+        }
+        
+        if (Gdx.input.isKeyJustPressed(Input.Keys.M)){
+        	if (Assets.menuTheme.isPlaying()){
+        		Assets.menuTheme.pause();
+        	} else {
+        		Assets.menuTheme.play();
+        	}
         }
     }
 }

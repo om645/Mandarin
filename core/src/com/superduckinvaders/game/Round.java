@@ -129,7 +129,8 @@ public class Round {
 
         // Mob spawning
         if (parent.session.currentLevel != 8) {
-            spawnRandomMobs(50, 0, 0, getMapWidth(), getMapHeight());
+        	if(parent.session.shootingCheat)spawnRandomMobs(300, 0, 0, getMapWidth(), getMapHeight());
+        	else spawnRandomMobs(50, 0, 0, getMapWidth(), getMapHeight());
         }
         else {
             addMob(new BossMob(this, getPlayer().getX(), getPlayer().getX()));
