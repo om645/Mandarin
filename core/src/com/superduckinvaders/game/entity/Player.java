@@ -375,8 +375,10 @@ public class Player extends TheCharacter {
         
         // Demented mode
         if (dementionTimer>0) {
-        	targetVelocity.x=-targetVelocity.x;
-        	targetVelocity.y=-targetVelocity.y;
+        	if (MathUtils.randomBoolean(0.4f)){
+        		targetVelocity.x=-targetVelocity.x;
+        		targetVelocity.y=-targetVelocity.y;
+        	}
         }
         
         // Stop walking off edge of screen in demented mode
