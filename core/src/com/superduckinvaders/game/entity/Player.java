@@ -377,6 +377,8 @@ public class Player extends TheCharacter {
         if (dementionTimer>0) {
         	if (MathUtils.randomBoolean(0.4f)){
         		targetVelocity.x=-targetVelocity.x;
+        	}
+        	if (MathUtils.randomBoolean(0.4f)){
         		targetVelocity.y=-targetVelocity.y;
         	}
         }
