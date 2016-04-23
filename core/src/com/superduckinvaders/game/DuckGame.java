@@ -35,7 +35,7 @@ public class DuckGame extends Game {
      */
      public static class Session {
         public int currentLevel = 1;
-        public int maxUnlocked = 8;
+        public int maxUnlocked = 8; // Needs to be changed back to 1 before release
         public int healthCounter = 6;
         public int totalScore = 0;
         ///////////////////////////////////////////////////
