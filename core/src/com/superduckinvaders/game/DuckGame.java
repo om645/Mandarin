@@ -93,6 +93,7 @@ public class DuckGame extends Game {
             pixmap.dispose();
         }
         
+        // Play/Pause music if M is pressed. 
         if (Gdx.input.isKeyJustPressed(Input.Keys.M)){
         	if (Assets.menuTheme.isPlaying()){
         		Assets.menuTheme.pause();

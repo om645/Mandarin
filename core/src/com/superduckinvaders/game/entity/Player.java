@@ -282,9 +282,9 @@ public class Player extends TheCharacter {
     public void update(float delta) {
         attackAnimationTimer += delta;
         
-        if (this instanceof Player && ((Player)this).dementionTimer>0)
-        {
+        if (this instanceof Player && ((Player)this).dementionTimer>0) {
         	if (((Player)this).dementionTimer-delta<0) {
+        		// Demention mode off so return to normal
         		((Player)this).dementionTimer=0;
             	parent.gameScreen.setShader(parent.gameScreen.standardShader);
         	} else {
@@ -296,16 +296,12 @@ public class Player extends TheCharacter {
             state = State.FLYING;
         }
         else if (isSwimming()){
-
             boolean  isPlaying = Assets.swimming.isPlaying();
             if (isPlaying == false){
                 Assets.swimming.play();
-
-
-
             }
             state = State.SWIMMING;
-        }else if (currentWeapon == Pickup.GUN && hasPickup(Pickup.GUN)) {
+        } else if (currentWeapon == Pickup.GUN && hasPickup(Pickup.GUN)) {
             state = State.HOLDING_GUN;
         } else if (currentWeapon == Pickup.LIGHTSABER && hasPickup(Pickup.LIGHTSABER)) {
             state = State.HOLDING_SABER;
@@ -356,15 +352,14 @@ public class Player extends TheCharacter {
         }
 
 
-        // Left/right movement.
-        
+        // Movement
         Vector2 targetVelocity = new Vector2();
         
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-        	targetVelocity.x = -1f; // Was +=, change back?
+        	targetVelocity.x = -1f;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-        	targetVelocity.x = 1f; // Was +=, change back?
+        	targetVelocity.x = 1f;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
         	targetVelocity.y = 1f;
@@ -375,6 +370,7 @@ public class Player extends TheCharacter {
         
         // Demented mode
         if (dementionTimer>0) {
+        	// Chance of inverting velocity.
         	if (MathUtils.randomBoolean(0.4f)){
         		targetVelocity.x=-targetVelocity.x;
         	}
@@ -500,7 +496,9 @@ public class Player extends TheCharacter {
         }
     }
     
-    // Remove collision detection with cheat
+    /**
+     * Remove collision detection with walls
+     */
     @Override
     public void preSolve(PhysicsEntity other, Contact contact, Manifold manifold) {
     	if (DuckGame.session.noHitboxCheat){

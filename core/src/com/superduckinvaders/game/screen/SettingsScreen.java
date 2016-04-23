@@ -67,7 +67,7 @@ public class SettingsScreen extends BaseScreen {
         Button shootingButton = new Button(new Button.ButtonStyle(button, button, button));
         shootingButton.setPosition((stage.getWidth() - shootingButton.getPrefWidth()) /2, 485);
         shootingButton.addListener(new ClickListener() {
-            @Override
+        	@Override
             public void clicked(InputEvent event, float x, float y) {
                 dispose();
                 getGame().session.shootingCheat=!getGame().session.shootingCheat;

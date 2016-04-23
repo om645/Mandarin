@@ -153,6 +153,7 @@ public class GameScreen extends BaseScreen {
         
         debugRenderer = new Box2DDebugRenderer();
         
+        // Set up shaders
         ShaderProgram.pedantic = false;
         standardShader = null; //new ShaderProgram(Gdx.files.internal("shaders/passthrough.vsh"), Gdx.files.internal("shaders/passthrough.fsh")); // Passthrough shader does nothing to affect the screen.
         dementedShader = new ShaderProgram(Gdx.files.internal("shaders/invert.vsh"), Gdx.files.internal("shaders/invert.fsh"));
@@ -399,6 +400,11 @@ public class GameScreen extends BaseScreen {
     private class MinimapViewport extends Viewport {
     }
     
+    /**
+     * Set the shader on the screen
+     * 
+     * @param shader The shader to use
+     */
     public void setShader(ShaderProgram shader){
     	if (shader != mapRenderer.getBatch().getShader()){
     		mapRenderer.getBatch().setShader(shader);
