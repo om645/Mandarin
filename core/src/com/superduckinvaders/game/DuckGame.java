@@ -38,10 +38,10 @@ public class DuckGame extends Game {
         public int maxUnlocked = 8; // Needs to be changed back to 1 before release
         public int healthCounter = 6;
         public int totalScore = 0;
-        ///////////////////////////////////////////////////
+        ///////////////////////NEW FOR ASSESSMENT 4////////////////////////////
         public boolean shootingCheat = false;
 		public boolean noHitboxCheat = false;
-        ///////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////
         public void incrementLevelCounter(){
             currentLevel += 1;
         }
@@ -93,6 +93,8 @@ public class DuckGame extends Game {
             pixmap.dispose();
         }
         
+        ///////////////////////NEW FOR ASSESSMENT 4////////////////////////////
+        
         // Play/Pause music if M is pressed. 
         if (Gdx.input.isKeyJustPressed(Input.Keys.M)){
         	if (Assets.menuTheme.isPlaying()){
@@ -101,5 +103,6 @@ public class DuckGame extends Game {
         		Assets.menuTheme.play();
         	}
         }
+        ///////////////////////////////////////////////////////////////////////
     }
 }

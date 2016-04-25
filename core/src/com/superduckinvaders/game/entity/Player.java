@@ -282,6 +282,8 @@ public class Player extends TheCharacter {
     public void update(float delta) {
         attackAnimationTimer += delta;
         
+        ///////////////////////NEW FOR ASSESSMENT 4////////////////////////////
+        
         if (this instanceof Player && ((Player)this).dementionTimer>0) {
         	if (((Player)this).dementionTimer-delta<0) {
         		// Demention mode off so return to normal
@@ -291,7 +293,8 @@ public class Player extends TheCharacter {
         		((Player)this).dementionTimer-=delta;
         	}
         }
-
+        ///////////////////////////////////////////////////////////////////////
+        
         if (isFlying()){
             state = State.FLYING;
         }
@@ -368,6 +371,8 @@ public class Player extends TheCharacter {
         	targetVelocity.y = -1f;
         }
         
+        ///////////////////////NEW FOR ASSESSMENT 4////////////////////////////
+        
         // Demented mode
         if (dementionTimer>0) {
         	// Chance of inverting velocity.
@@ -388,7 +393,7 @@ public class Player extends TheCharacter {
         	getPosition().y - getHeight()/2   < 0                     && targetVelocity.y < 0f) {
         	targetVelocity.y = 0f;
         }
-        
+        ////////////////////////////////////////////////////////////////////////
         
         // Calculate speed at which to move the player.
         float speed = PLAYER_SPEED * (hasPickup(Pickup.SUPER_SPEED) ? PLAYER_SUPER_SPEED_MULTIPLIER : 1);
@@ -496,6 +501,8 @@ public class Player extends TheCharacter {
         }
     }
     
+    ///////////////////////NEW FOR ASSESSMENT 4////////////////////////////
+    
     /**
      * Remove collision detection with walls
      */
@@ -505,4 +512,5 @@ public class Player extends TheCharacter {
     		contact.setEnabled(false);
     	}
     }
+    ///////////////////////////////////////////////////////////////////////
 }
