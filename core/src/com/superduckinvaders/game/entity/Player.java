@@ -359,16 +359,16 @@ public class Player extends TheCharacter {
         Vector2 targetVelocity = new Vector2();
         
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-        	targetVelocity.x = -1f;
+        	targetVelocity.x += -1f;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-        	targetVelocity.x = 1f;
+        	targetVelocity.x += 1f;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-        	targetVelocity.y = 1f;
+        	targetVelocity.y += 1f;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-        	targetVelocity.y = -1f;
+        	targetVelocity.y += -1f;
         }
         
         ///////////////////////NEW FOR ASSESSMENT 4////////////////////////////
