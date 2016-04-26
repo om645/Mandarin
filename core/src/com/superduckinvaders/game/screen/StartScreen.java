@@ -64,7 +64,7 @@ public class StartScreen extends BaseScreen {
 
             }
         });
-        
+        /////////////////////NEW FOR ASSESMENT 4///////////////////////////
         Button settingsButton = new Button(new Button.ButtonStyle(button, button, button));
         settingsButton.setPosition((stage.getWidth() - mapButton.getPrefWidth()) / 2, 200);
         settingsButton.addListener(new ClickListener() {
@@ -75,7 +75,7 @@ public class StartScreen extends BaseScreen {
 
             }
         });
-
+        ////////////////////////////////////////////////////////////////////////////
         Label.LabelStyle white = new Label.LabelStyle(Assets.font, Color.WHITE);
 
         Label playLabel = new Label("START", white);
@@ -85,18 +85,21 @@ public class StartScreen extends BaseScreen {
         Label mapLabel = new Label("LEVEL SELECT", white);
         mapLabel.setPosition((stage.getWidth() - mapLabel.getPrefWidth()) / 2, 265);
         mapLabel.setTouchable(Touchable.disabled);
-        
+        /////////////////////NEW FOR ASSESMENT 4///////////////////////////
         Label settingsLabel = new Label("CHEATS", white);
         settingsLabel.setPosition((stage.getWidth() - settingsLabel.getPrefWidth()) / 2, 215);
         settingsLabel.setTouchable(Touchable.disabled);
+        /////////////////////////////////////////////////////////////////
 
         stage.addActor(logoImage);
         stage.addActor(playButton);
         stage.addActor(playLabel);
         stage.addActor(mapButton);
         stage.addActor(mapLabel);
+        /////////////////////NEW FOR ASSESMENT 4///////////////////////////
         stage.addActor(settingsButton);
         stage.addActor(settingsLabel);
+        ///////////////////////////////////////////////////////////////
     }
 
     /**

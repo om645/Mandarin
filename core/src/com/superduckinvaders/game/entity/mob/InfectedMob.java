@@ -1,3 +1,4 @@
+//////////////////////////NEW FOR ASSESSMENT 4 /////////////////////////
 package com.superduckinvaders.game.entity.mob;
 
 import com.superduckinvaders.game.Round;
@@ -19,3 +20,4 @@ public class InfectedMob extends MeleeMob {
         infecting = true;
     }
 }
+///////////////////////////////////////////////////

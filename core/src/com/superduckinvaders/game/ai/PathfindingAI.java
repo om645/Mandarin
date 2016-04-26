@@ -67,7 +67,7 @@ public class PathfindingAI extends AI {
      * The Coordinate for the AI to find a path for.
      */
     public Coordinate target;
-    //////////////////////////////////////////////////////
+    //////////////////////////NEW FOR ASSESSMENT 4 /////////////////////////
     /**
      * The Coordinate for the AI to find a path for.
      */

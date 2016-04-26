@@ -310,10 +310,12 @@ public class Round {
                 	if (randNum>0.2) {
                 		addMob(new GunnerMob(this, x, y));
                 	}
+    //////////////////////////NEW FOR ASSESSMENT 4 /////////////////////////
                 	else{
                 		//addMob(new ZombieMob(this, x, y));
                 		addMob(new InfectedMob(this, x, y));
                 	}         
+    ///////////////////////////////////////////////////////////////////////
                 }
                 i++;
         }
@@ -367,7 +369,7 @@ public class Round {
     public TiledMapTileLayer getOverhangLayer() {
         return (TiledMapTileLayer) getMap().getLayers().get("Overhang");
     }
-    
+    //////////////////////////NEW FOR ASSESSMENT 4 /////////////////////////
     /**
      * gets the base2 layer of the map
      * @return this Round's base2 map layer (rendered over entities)
@@ -375,7 +377,7 @@ public class Round {
     public TiledMapTileLayer getBase2Layer() {
         return (TiledMapTileLayer) getMap().getLayers().get("Base2");
     }
-
+///////////////////////////////////////////////////
     /**
      * Gets the width of the map in pixels
      * @return the width of this Round's map in pixels

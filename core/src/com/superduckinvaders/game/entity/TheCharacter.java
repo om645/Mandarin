@@ -140,6 +140,7 @@ public abstract class TheCharacter extends PhysicsEntity {
         this.currentHealth -= health;
         stunnedTimer = 0f;
     }
+    //////////////////////////NEW FOR ASSESSMENT 4 /////////////////////////
     
     /**
      * Damages this Character's health by the specified number of points and infects it if needed.
@@ -155,7 +156,7 @@ public abstract class TheCharacter extends PhysicsEntity {
         	parent.gameScreen.setShader(parent.gameScreen.dementedShader);
         }
     }
-
+///////////////////////////////////////////////////
 
 
     public boolean isStunned(){

@@ -114,11 +114,12 @@ public class Player extends TheCharacter {
      */
     protected Pickup currentWeapon = Pickup.GUN;
     
-
+//////////////////////////NEW FOR ASSESSMENT 4 /////////////////////////
     /**
      * Demention timer.
      */
     public float dementionTimer = 0;
+//////////////////////////////////////////////////
 
     /**
      * Initialises this Player at the specified coordinates and with the specified initial health.
@@ -208,8 +209,11 @@ public class Player extends TheCharacter {
         }
     }
 
+    ///////////////////////NEW FOR ASSESSMENT 4////////////////////////////
     /**
      * Give a pickup to the player for a certain amount of time.
+     * If pickup lasts infinitely long, avoid replacing it with timed one.
+     *
      * @param pickup   the pickup
      * @param duration the amount of time the pickup applies.
      */
@@ -221,6 +225,7 @@ public class Player extends TheCharacter {
     	}
     	else pickupMap.put(pickup, duration);
     }
+    ///////////////////////////////////////////////////////////////////////
 
     /**
      * @param pickup the pickup to test for.

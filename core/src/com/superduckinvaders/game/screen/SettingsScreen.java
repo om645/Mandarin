@@ -1,3 +1,5 @@
+///////////////////////NEW FOR ASSESSMENT 4////////////////////////////
+
 package com.superduckinvaders.game.screen;
 
 import com.badlogic.gdx.Gdx;
@@ -27,10 +29,10 @@ public class SettingsScreen extends BaseScreen {
 
 
     /**
-     * Start off the BaseScreen
+     * Start off the SettingsScreen
      *
      * @param game The main game class
-     * @see BaseScreen#getGame
+     * @see SettingsScreen#getGame
      */
     public SettingsScreen(DuckGame game) {
         super(game);
@@ -131,4 +133,4 @@ public class SettingsScreen extends BaseScreen {
         Gdx.input.setInputProcessor(null);
         stage.dispose();
     }
-}
+}//////////////////////////////////////////////////////////////////////
