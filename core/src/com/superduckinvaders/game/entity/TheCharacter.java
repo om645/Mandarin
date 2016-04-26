@@ -156,7 +156,7 @@ public abstract class TheCharacter extends PhysicsEntity {
         	parent.gameScreen.setShader(parent.gameScreen.dementedShader);
         }
     }
-///////////////////////////////////////////////////
+    ///////////////////////////////////////////////////
 
 
     public boolean isStunned(){

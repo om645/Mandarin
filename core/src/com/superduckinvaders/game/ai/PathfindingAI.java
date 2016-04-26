@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.superduckinvaders.game.DuckGame;
 import com.superduckinvaders.game.Round;
 import com.superduckinvaders.game.assets.TextureSet;
+import com.superduckinvaders.game.entity.mob.InfectedMob;
 import com.superduckinvaders.game.entity.mob.Mob;
 
 import java.util.ArrayList;
@@ -124,8 +125,15 @@ public class PathfindingAI extends AI {
             	break;
             }
 
-            if (round.getPlayer().dementionTimer==0) target = FindPath(mob);
-            else target = FindRandPath(mob);
+            if (round.getPlayer().dementionTimer==0) {
+            	target = FindPath(mob);
+            } else {
+            	if (mob instanceof InfectedMob) {
+            		target = FindRandPath(mob);
+            	} else{
+            		target = FindPath(mob);
+            	}
+            }
             //////////////////////////////////////////////////////////
         }
         
