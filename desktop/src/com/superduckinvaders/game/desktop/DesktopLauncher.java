@@ -1,5 +1,5 @@
 /**
- * URL for executable: https://drive.google.com/file/d/0B4to7QAfaHDIeEE0TG4tR0dyRk0/view?usp=sharing
+ * URL for executable: https://4d45b16264c555b3f8e66ac055f749f7a2451836-www.googledrive.com/host/0B4aXpJk4iCmSMVNXODg5bVVuYkU/SuperDuckInvadersMandarin.zip
  */
 
 package com.superduckinvaders.game.desktop;
@@ -16,7 +16,6 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.width = 1280;
 		config.height = 720;
-//		config.useGL30 = true;
 		config.resizable = true;
 		config.title = "SUPER DUCK INVADERS! - Team Mandarin";
 		new LwjglApplication(new DuckGame(), config);
